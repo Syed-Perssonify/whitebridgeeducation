@@ -1,0 +1,10 @@
+/* Animated country border effect for rotating globe */
+@keyframes dash {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+.animated-country-border {
+  animation: dash 20s linear infinite;
+}
