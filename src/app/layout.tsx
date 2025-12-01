@@ -4,6 +4,7 @@ import "./globals.css";
 import "aos/dist/aos.css";
 import "lenis/dist/lenis.css";
 import "swiper/css";
+import Header from "@/common/element/layout/header";
 import Footer from "@/common/element/layout/footer";
 import BackToTop from "@/common/element/layout/back-to-top";
 import ClientInit from "@/common/element/layout/client-init";
@@ -28,7 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${firaSans.variable} antialiased`}>
         <ClientInit />
-
+        <Header />
         <main className="relative z-0">{children}</main>
         <BackToTop />
         <Footer />
