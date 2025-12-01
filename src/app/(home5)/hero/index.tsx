@@ -139,7 +139,7 @@ export default function HeroSection() {
       >
         <div className="flex flex-col lg:flex-row items-center justify-between min-h-screen py-20 gap-8">
           {/* Content - Left Side */}
-          <div className="w-full lg:w-1/2 text-left">
+          <div className="w-full lg:w-1/2 text-left ">
             {/* Eyebrow */}
             <motion.div
               initial={{ opacity: 0, y: 18 }}

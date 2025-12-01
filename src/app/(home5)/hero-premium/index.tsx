@@ -4,13 +4,11 @@ import { useRef, useEffect, useState, useCallback, useMemo } from "react";
 import dynamic from "next/dynamic";
 import {
   motion,
-  useScroll,
-  useTransform,
   useMotionValue,
   useSpring,
 } from "framer-motion";
 import { FaArrowRight, FaChevronRight } from "react-icons/fa";
-import { GraduationCap } from "lucide-react";
+import { TrendingUp, Users, Globe2, type LucideIcon } from "lucide-react";
 
 // Lazy load heavy components
 const WorldPremium = dynamic(
@@ -25,47 +23,19 @@ const WorldPremium = dynamic(
   }
 );
 
-
-// Optimized floating particle component
-const FloatingParticle = ({
-  delay,
-  duration,
-  size,
-  x,
-  y,
-}: {
-  delay: number;
-  duration: number;
-  size: number;
-  x: string;
-  y: string;
-}) => (
-  <motion.div
-    className="absolute rounded-full bg-white/15 pointer-events-none"
-    style={{ width: size, height: size, left: x, top: y }}
-    initial={{ opacity: 0 }}
-    animate={{
-      y: [0, -25, 0],
-      opacity: [0.1, 0.4, 0.1],
-    }}
-    transition={{
-      duration,
-      delay,
-      repeat: Infinity,
-      ease: "easeInOut",
-    }}
-  />
-);
-
-// Animated counter with intersection observer
+// Animated counter with intersection observer - Premium Design
 const AnimatedCounter = ({
   end,
   suffix = "",
   label,
+  icon: Icon,
+  delay = 0,
 }: {
   end: number;
   suffix?: string;
   label: string;
+  icon: LucideIcon;
+  delay?: number;
 }) => {
   const [count, setCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -82,7 +52,6 @@ const AnimatedCounter = ({
           const animate = (timestamp: number) => {
             if (!startTime) startTime = timestamp;
             const progress = Math.min((timestamp - startTime) / duration, 1);
-            // Easing function for smoother animation
             const eased = 1 - Math.pow(1 - progress, 3);
             setCount(Math.floor(eased * end));
             if (progress < 1) requestAnimationFrame(animate);
@@ -99,15 +68,25 @@ const AnimatedCounter = ({
   }, [end, hasAnimated]);
 
   return (
-    <div ref={ref} className="text-center">
-      <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-white tabular-nums">
-        {count}
-        {suffix}
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.8 + delay }}
+      className="group relative"
+    >
+      <div className="relative flex flex-col items-center p-4 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] hover:bg-white/[0.06] hover:border-white/10 transition-all duration-500">
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <Icon className="w-5 h-5 text-[#92bec0] mb-2 opacity-70 group-hover:opacity-100 transition-opacity" />
+        <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tabular-nums tracking-tight">
+          {count}
+          <span className="text-[#cd553b]">{suffix}</span>
+        </div>
+        <div className="text-[10px] sm:text-xs text-white/50 mt-1.5 font-medium uppercase tracking-wider">
+          {label}
+        </div>
       </div>
-      <div className="text-xs md:text-sm text-white/60 mt-1 font-medium">
-        {label}
-      </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -116,7 +95,6 @@ const AnimatedCounter = ({
 
 
 export default function HeroPremium() {
-  const sectionRef = useRef<HTMLElement>(null);
   const [isMounted, setIsMounted] = useState(false);
 
   // Hydration safe
@@ -141,14 +119,6 @@ export default function HeroPremium() {
     },
     [mouseX, mouseY]
   );
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.4], [1, 0.98]);
 
   // Premium globe config with elegant styling - static for best UX
   const globeConfig = useMemo(
@@ -260,144 +230,184 @@ export default function HeroPremium() {
     []
   );
 
-
-  // Reduced particles for performance (8 instead of 20)
-  const particles = useMemo(
-    () =>
-      Array.from({ length: 8 }, (_, i) => ({
-        id: i,
-        delay: Math.random() * 4,
-        duration: 5 + Math.random() * 3,
-        size: 3 + Math.random() * 3,
-        x: `${10 + Math.random() * 80}%`,
-        y: `${10 + Math.random() * 80}%`,
-      })),
-    []
-  );
-
   return (
     <section
-      ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-screen flex items-center overflow-x-hidden"
     >
-      {/* Background Layers */}
+      {/* Premium Background System */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a1d4a] via-[#2a2b76] to-[#1e2756]" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-[#cd553b]/8 via-transparent to-[#92bec0]/12" />
+        {/* Base gradient - deep sophisticated navy */}
+        <div className="absolute inset-0 bg-[#0a0c1a]" />
 
-        {/* Animated orbs */}
-        <div className="absolute top-1/4 -left-20 w-80 h-80 bg-[#cd553b]/15 rounded-full blur-[100px] animate-pulse" />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-[#92bec0]/10 rounded-full blur-[120px]" />
+        {/* Layered gradients for depth */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0f1228] via-[#151a3d] to-[#0d1025]" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-[#cd553b]/5 via-transparent to-[#92bec0]/8" />
 
-        {/* Subtle grid */}
-        <div
-          className="absolute inset-0 opacity-[0.02]"
+        {/* Radial accent from center-right for globe glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_50%,rgba(146,190,192,0.08)_0%,transparent_50%)]" />
+
+        {/* Subtle vignette */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,12,26,0.4)_100%)]" />
+
+        {/* Animated ambient glow - coral accent */}
+        <motion.div
+          className="absolute top-[20%] left-[5%] w-[400px] h-[400px] rounded-full"
           style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "50px 50px",
+            background: "radial-gradient(circle, rgba(205,85,59,0.12) 0%, transparent 70%)",
+            filter: "blur(80px)",
+          }}
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.6, 0.8, 0.6],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
           }}
         />
+
+        {/* Animated ambient glow - teal accent */}
+        <motion.div
+          className="absolute bottom-[10%] left-[15%] w-[300px] h-[300px] rounded-full"
+          style={{
+            background: "radial-gradient(circle, rgba(146,190,192,0.1) 0%, transparent 70%)",
+            filter: "blur(60px)",
+          }}
+          animate={{
+            scale: [1, 1.15, 1],
+            opacity: [0.5, 0.7, 0.5],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+        />
+
+        {/* Geometric accent lines */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="heroGrid" width="80" height="80" patternUnits="userSpaceOnUse">
+              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="white" strokeWidth="0.5" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#heroGrid)" />
+        </svg>
+
+        {/* Diagonal accent line */}
+        <div className="absolute top-0 left-[30%] w-px h-full bg-gradient-to-b from-transparent via-white/[0.03] to-transparent transform -skew-x-12" />
+        <div className="absolute top-0 left-[35%] w-px h-full bg-gradient-to-b from-transparent via-[#cd553b]/[0.05] to-transparent transform -skew-x-12" />
       </div>
 
-      {/* Floating Particles */}
-      {isMounted &&
-        particles.map((p) => <FloatingParticle key={p.id} {...p} />)}
-
       {/* Main Content */}
-      <motion.div style={{ opacity, scale }} className="relative z-10 w-full">
+      <div className="relative z-10 w-full">
         <div className="max-w-[1500px] mx-auto px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12">
-          <div className="flex flex-col lg:flex-row items-center justify-between min-h-screen py-20 lg:py-24 gap-10 lg:gap-6">
-            {/* Left Content */}
-            <div className="w-full lg:w-[48%] xl:w-[45%] text-center lg:text-left z-20">
-              {/* Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="mb-6 lg:mb-8"
-              >
-                <span className="inline-flex items-center gap-2.5 bg-white/5 backdrop-blur-xl text-white text-[10px] sm:text-xs uppercase tracking-[0.15em] font-medium px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-white/10">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#cd553b] opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#cd553b]" />
-                  </span>
-                  Connecting Two Regions. Multiplying Opportunities.
-                </span>
-              </motion.div>
+          <div className="flex flex-col lg:flex-row items-center justify-center min-h-screen pt-24 pb-16 lg:pt-28 lg:pb-20 gap-8 lg:gap-6">
+            {/* Left Content - Premium Design */}
+            <div className="w-full lg:w-[48%] xl:w-[45%] text-center lg:text-left z-20 flex flex-col justify-center pt-10">
 
-              {/* Headline */}
-              <motion.h1
+
+              {/* Premium Headline */}
+              <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.35 }}
-                className="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-5xl 2xl:text-6xl mb-6 lg:mb-8 leading-[1.1] tracking-tight"
+                transition={{ duration: 0.7, delay: 0.35 }}
+                className="mb-6 lg:mb-8"
               >
-                <span className="text-white">Built on </span>
-                <span className="bg-gradient-to-r from-[#cd553b] to-[#e8836c] bg-clip-text text-transparent">
-                  ethics.
-                </span>
-                <br />
-                <span className="text-white">Powered by </span>
-                <span className="bg-gradient-to-r from-[#92bec0] to-[#b8d4d5] bg-clip-text text-transparent">
-                  data.
-                </span>
-                <br />
-                <span className="text-white">Committed to </span>
-                <span className="text-white">ROI.</span>
-              </motion.h1>
+                <h1 className="font-bold text-4xl md:text-5xl lg:text-[2.85rem] xl:text-[3.25rem] 2xl:text-6xl leading-[1.08] tracking-[-0.02em]">
+                  <span className="block text-white/95">
+                    Built on{" "}
+                    <span className="relative inline-block">
+                      <span className="bg-gradient-to-r from-[#cd553b] via-[#e8836c] to-[#cd553b] bg-clip-text text-transparent bg-[length:200%_auto] animate-[shimmer_3s_ease-in-out_infinite]">
+                        ethics
+                      </span>
+                      <span className="text-[#cd553b]">.</span>
+                    </span>
+                  </span>
+                  <span className="block text-white/95 mt-1">
+                    Powered by{" "}
+                    <span className="relative inline-block">
+                      <span className="bg-gradient-to-r from-[#92bec0] via-[#b8d4d5] to-[#92bec0] bg-clip-text text-transparent bg-[length:200%_auto] animate-[shimmer_3s_ease-in-out_infinite_0.5s]">
+                        data
+                      </span>
+                      <span className="text-[#92bec0]">.</span>
+                    </span>
+                  </span>
+                  <span className="block text-white/95 mt-1">
+                    Committed to{" "}
+                    <span className="relative inline-block">
+                      <span className="text-white font-extrabold">ROI</span>
+                      <span className="text-white">.</span>
+                      {/* Underline accent */}
+                      <motion.span
+                        className="absolute -bottom-1 left-0 h-[3px] bg-gradient-to-r from-[#cd553b] to-[#92bec0] rounded-full"
+                        initial={{ width: 0 }}
+                        animate={{ width: "100%" }}
+                        transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
+                      />
+                    </span>
+                  </span>
+                </h1>
+              </motion.div>
 
-              {/* Subheadline */}
+              {/* Premium Subheadline */}
               <motion.p
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="text-white/75 text-sm sm:text-base md:text-lg lg:text-base xl:text-lg mb-8 lg:mb-10 leading-relaxed max-w-lg mx-auto lg:mx-0"
+                className="text-white/60 text-sm sm:text-base md:text-lg lg:text-base xl:text-lg mb-8 lg:mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0 font-light"
               >
                 Connecting Global Universities to{" "}
-                <span className="text-[#92bec0] font-semibold">South Asia</span>{" "}
+                <span className="text-[#92bec0] font-medium">South Asia</span>{" "}
                 and{" "}
-                <span className="text-[#cd553b] font-semibold">
+                <span className="text-[#cd553b] font-medium">
                   the Middle East
                 </span>{" "}
                 — the world&apos;s fastest-growing education markets.
               </motion.p>
 
-              {/* CTAs */}
+              {/* Premium CTAs */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.65 }}
-                className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-10 lg:mb-12"
+                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8 lg:mb-10"
               >
+                {/* Primary CTA */}
                 <a
                   href="#contact"
-                  className="group relative inline-flex items-center justify-center gap-2 bg-[#cd553b] text-white font-semibold px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-[#b84a33] hover:shadow-xl hover:shadow-[#cd553b]/25 hover:scale-[1.02] active:scale-[0.98]"
+                  className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full px-8 py-4 font-semibold text-white transition-all duration-500"
                 >
-                  <span>Contact Us</span>
-                  <FaArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                  {/* Gradient background */}
+                  <span className="absolute inset-0 bg-gradient-to-r from-[#cd553b] via-[#d9664d] to-[#cd553b] bg-[length:200%_auto] transition-all duration-500 group-hover:bg-[position:right_center]" />
+                  {/* Shine effect */}
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                  {/* Glow */}
+                  <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-[0_0_30px_rgba(205,85,59,0.5)]" />
+                  <span className="relative">Contact Us</span>
+                  <FaArrowRight className="relative w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </a>
 
+                {/* Secondary CTA */}
                 <a
                   href="#markets"
-                  className="group inline-flex items-center justify-center gap-2 bg-white/5 backdrop-blur-md text-white font-semibold px-7 py-3.5 rounded-full border border-white/15 hover:bg-white/10 hover:border-white/30 transition-all duration-300"
+                  className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full px-8 py-4 font-semibold text-white transition-all duration-500"
                 >
-                  <span>Our Markets</span>
-                  <FaChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                  {/* Border gradient */}
+                  <span className="absolute inset-0 rounded-full border border-white/[0.12] group-hover:border-white/25 transition-colors duration-500" />
+                  {/* Background on hover */}
+                  <span className="absolute inset-0 rounded-full bg-white/[0.03] group-hover:bg-white/[0.08] transition-colors duration-500" />
+                  {/* Shine effect */}
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                  <span className="relative text-white/80 group-hover:text-white transition-colors">Our Markets</span>
+                  <FaChevronRight className="relative w-3.5 h-3.5 text-white/60 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-300" />
                 </a>
               </motion.div>
 
-              {/* Stats */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                className="flex justify-center lg:justify-start gap-6 sm:gap-10 pt-8 border-t border-white/10"
-              >
-                <AnimatedCounter end={8} suffix="+" label="Markets" />
-                <AnimatedCounter end={50} suffix="+" label="Partners" />
-                <AnimatedCounter end={10} suffix="K+" label="Students" />
-              </motion.div>
+
             </div>
 
             {/* Right Side - Globe */}
@@ -444,36 +454,8 @@ export default function HeroPremium() {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 hidden md:block"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2 text-white/40"
-        >
-          <span className="text-[10px] uppercase tracking-[0.2em] font-medium">
-            Scroll
-          </span>
-          <div className="w-5 h-8 rounded-full border border-white/20 flex items-start justify-center p-1.5">
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="w-1 h-1 bg-white/50 rounded-full"
-            />
-          </div>
-        </motion.div>
-      </motion.div>
     </section>
   );
 }
