@@ -420,21 +420,128 @@ export default function HeroPremium() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="relative"
               >
-                {/* Graduation Cap - Top Right of Globe */}
-                {/* <motion.div
-                  className="absolute top-12 sm:top-16 md:top-20 right-[15%] sm:right-[18%] md:right-[20%] z-20"
-                  initial={{ opacity: 0, y: -20, rotate: 0 }}
-                  animate={{ opacity: 1, y: 0, rotate: 25 }}
-                  transition={{ duration: 0.6, delay: 0.8 }}
+                {/* Premium Graduation Cap - Clean Modern Design */}
+                <motion.div
+                  className="absolute top-6 sm:top-10 md:top-14 right-[10%] sm:right-[12%] md:right-[15%] z-20"
+                  initial={{ opacity: 0, y: -20, scale: 0.9 }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                  }}
+                  transition={{
+                    duration: 0.7,
+                    delay: 1,
+                    ease: [0.34, 1.56, 0.64, 1]
+                  }}
                 >
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-[#cd553b]/20 blur-2xl rounded-full scale-150" />
-                    <GraduationCap
-                      className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 text-[#cd553b] scale-110 drop-shadow-lg relative"
-                      strokeWidth={2}
-                    />
-                  </div>
-                </motion.div> */}
+                  <motion.div
+                    className="relative"
+                    animate={{
+                      y: [0, -6, 0],
+                      rotate: [8, 12, 8],
+                    }}
+                    transition={{
+                      duration: 5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    {/* Soft glow */}
+                    <div className="absolute -inset-4 bg-[#cd553b]/20 blur-3xl rounded-full" />
+
+                    {/* Clean Modern Graduation Cap SVG */}
+                    <svg
+                      viewBox="0 0 100 100"
+                      className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 relative"
+                      style={{ filter: 'drop-shadow(0 10px 30px rgba(0, 0, 0, 0.4))' }}
+                    >
+                      <defs>
+                        {/* Main board gradient - rich dark with subtle depth */}
+                        <linearGradient id="boardMain" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#2a2d3e" />
+                          <stop offset="40%" stopColor="#1f2233" />
+                          <stop offset="100%" stopColor="#151722" />
+                        </linearGradient>
+                        {/* Board top shine */}
+                        <linearGradient id="boardShine" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="rgba(255,255,255,0.15)" />
+                          <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+                        </linearGradient>
+                        {/* Cap base gradient */}
+                        <linearGradient id="capBase" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="#252839" />
+                          <stop offset="100%" stopColor="#1a1c28" />
+                        </linearGradient>
+                        {/* Tassel coral gradient */}
+                        <linearGradient id="tasselCoral" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="#e07058" />
+                          <stop offset="50%" stopColor="#cd553b" />
+                          <stop offset="100%" stopColor="#b54530" />
+                        </linearGradient>
+                        {/* Gold button */}
+                        <radialGradient id="goldButton" cx="30%" cy="30%" r="70%">
+                          <stop offset="0%" stopColor="#ffe066" />
+                          <stop offset="50%" stopColor="#ffc733" />
+                          <stop offset="100%" stopColor="#d4a520" />
+                        </radialGradient>
+                      </defs>
+
+                      {/* Cap base (skull cap) */}
+                      <ellipse
+                        cx="50" cy="58" rx="22" ry="12"
+                        fill="url(#capBase)"
+                      />
+                      <ellipse
+                        cx="50" cy="56" rx="20" ry="10"
+                        fill="url(#capBase)"
+                        stroke="rgba(255,255,255,0.05)"
+                        strokeWidth="0.5"
+                      />
+
+                      {/* Mortarboard - clean diamond */}
+                      <polygon
+                        points="50,22 88,44 50,66 12,44"
+                        fill="url(#boardMain)"
+                      />
+                      {/* Board edge highlight */}
+                      <polygon
+                        points="50,22 88,44 50,66 12,44"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.08)"
+                        strokeWidth="1"
+                      />
+                      {/* Top face shine */}
+                      <polygon
+                        points="50,22 69,33 50,44 31,33"
+                        fill="url(#boardShine)"
+                      />
+
+                      {/* Center button */}
+                      <circle cx="50" cy="44" r="4" fill="url(#goldButton)" />
+                      <circle cx="48" cy="42" r="1.5" fill="rgba(255,255,255,0.5)" />
+
+                      {/* Tassel cord */}
+                      <path
+                        d="M50,44 Q58,50 62,60 Q65,70 62,78"
+                        stroke="url(#tasselCoral)"
+                        strokeWidth="2.5"
+                        fill="none"
+                        strokeLinecap="round"
+                      />
+
+                      {/* Tassel knot */}
+                      <circle cx="62" cy="78" r="4" fill="url(#tasselCoral)" />
+
+                      {/* Tassel threads */}
+                      <g stroke="#cd553b" strokeWidth="2" strokeLinecap="round">
+                        <line x1="59" y1="81" x2="57" y2="92" />
+                        <line x1="62" y1="82" x2="61" y2="94" />
+                        <line x1="65" y1="81" x2="66" y2="92" />
+                      </g>
+                    </svg>
+                  </motion.div>
+                </motion.div>
 
                 {/* Glow */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
