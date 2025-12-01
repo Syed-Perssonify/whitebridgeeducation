@@ -9,7 +9,8 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
-import { FaGraduationCap, FaArrowRight, FaChevronRight } from "react-icons/fa";
+import { FaArrowRight, FaChevronRight } from "react-icons/fa";
+import { GraduationCap } from "lucide-react";
 
 // Lazy load heavy components
 const WorldPremium = dynamic(
@@ -110,64 +111,9 @@ const AnimatedCounter = ({
   );
 };
 
-// Region marker with pulse effect
-const RegionMarker = ({
-  icon,
-  label,
-  delay,
-  position,
-}: {
-  icon: string;
-  label: string;
-  delay: number;
-  position: string;
-}) => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0 }}
-    animate={{ opacity: 1, scale: 1 }}
-    transition={{ delay, type: "spring", stiffness: 200, damping: 15 }}
-    className={`absolute ${position} z-20 hidden lg:block`}
-  >
-    <div className="group relative">
-      <div className="w-12 h-12 xl:w-14 xl:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-lg xl:text-xl hover:bg-white/20 hover:scale-110 hover:border-[#cd553b]/50 transition-all duration-300 cursor-pointer shadow-lg">
-        {icon}
-      </div>
-      {/* Pulse ring */}
-      <div className="absolute inset-0 rounded-full border border-white/20 animate-ping opacity-30" />
-      {/* Tooltip */}
-      <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none">
-        <div className="bg-[#1a1d4a]/95 backdrop-blur-sm text-white text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap border border-white/10 shadow-xl">
-          {label}
-          <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#1a1d4a]/95 rotate-45 border-l border-t border-white/10" />
-        </div>
-      </div>
-    </div>
-  </motion.div>
-);
 
-// Professional Graduation Cap Component  
-const GraduationHat = () => (
-  <div className="relative flex items-center justify-center">
-    {/* Glow effect behind the cap */}
-    <div className="absolute inset-0 flex items-center justify-center">
-      <div className="w-24 h-24 bg-white/20 rounded-full blur-2xl" />
-    </div>
-    {/* Main graduation cap with styled container */}
-    <div className="relative bg-gradient-to-br from-[#1a1d4a] to-[#2a2b76] rounded-full p-4 shadow-2xl border-2 border-white/20">
-      <FaGraduationCap
-        className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 text-white"
-        style={{
-          filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))',
-        }}
-      />
-      {/* Gold/coral tassel */}
-      <div className="absolute -bottom-1 right-0 flex flex-col items-center">
-        <div className="w-1 h-6 bg-gradient-to-b from-[#cd553b] via-[#e07860] to-[#cd553b]" />
-        <div className="w-3 h-3 bg-[#cd553b] rounded-full shadow-lg animate-pulse" />
-      </div>
-    </div>
-  </div>
-);
+
+
 
 export default function HeroPremium() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -230,78 +176,85 @@ export default function HeroPremium() {
     []
   );
 
-  // Arc data - premium sequential animations from India hub
+  // Arc data - South Asia (by country), other regions by region name
   const arcData = useMemo(
     () => [
-      // India → UAE (medium distance)
+      // South Asia - Nepal (country name)
       {
         order: 1,
         startLat: 20.5937,
         startLng: 78.9629,
-        endLat: 25.2048,
-        endLng: 55.2708,
-        arcAlt: 0.12,  // Reduced from 0.25
+        endLat: 28.3949,
+        endLng: 84.124,
+        arcAlt: 0.06,
         color: "#ffffff",
+        label: "Nepal",
       },
-      // India → Saudi Arabia (medium distance)
+      // South Asia - Bangladesh (country name)
       {
         order: 2,
         startLat: 20.5937,
         startLng: 78.9629,
-        endLat: 23.8859,
-        endLng: 45.0792,
-        arcAlt: 0.14,  // Reduced from 0.28
+        endLat: 23.685,
+        endLng: 90.3563,
+        arcAlt: 0.05,
         color: "#ffffff",
+        label: "Bangladesh",
       },
-      // India → Kenya (long distance)
+      // South Asia - Sri Lanka (country name)
       {
         order: 3,
         startLat: 20.5937,
         startLng: 78.9629,
-        endLat: -1.2921,
-        endLng: 36.8219,
-        arcAlt: 0.18,  // Reduced from 0.35
+        endLat: 7.8731,
+        endLng: 80.7718,
+        arcAlt: 0.06,
         color: "#ffffff",
+        label: "Sri Lanka",
       },
-      // India → Nepal (short distance - keep similar)
+      // Africa (region name) - pointing to Kenya
       {
         order: 4,
         startLat: 20.5937,
         startLng: 78.9629,
-        endLat: 28.3949,
-        endLng: 84.124,
-        arcAlt: 0.06,  // Slightly reduced from 0.08
+        endLat: -1.2921,
+        endLng: 36.8219,
+        arcAlt: 0.18,
         color: "#ffffff",
+        label: "Africa",
       },
-      // India → Bangladesh (short distance)
+      // Middle East (region name) - pointing to UAE
       {
         order: 5,
         startLat: 20.5937,
         startLng: 78.9629,
-        endLat: 23.685,
-        endLng: 90.3563,
-        arcAlt: 0.05,  // Reduced from 0.06
+        endLat: 25.2048,
+        endLng: 55.2708,
+        arcAlt: 0.12,
         color: "#ffffff",
+        label: "Middle East",
       },
-      // India → Sri Lanka (short distance)
+      // Central Asia (region name) - pointing to Kazakhstan
       {
         order: 6,
         startLat: 20.5937,
         startLng: 78.9629,
-        endLat: 7.8731,
-        endLng: 80.7718,
-        arcAlt: 0.06,  // Reduced from 0.08
+        endLat: 48.0196,
+        endLng: 66.9237,
+        arcAlt: 0.16,
         color: "#ffffff",
+        label: "Central Asia",
       },
-      // India → Kazakhstan (long distance)
+      // West Asia (region name) - pointing to Turkey
       {
         order: 7,
         startLat: 20.5937,
         startLng: 78.9629,
-        endLat: 48.0196,
-        endLng: 66.9237,
-        arcAlt: 0.16,  // Reduced from 0.35
+        endLat: 38.9637,
+        endLng: 35.2433,
+        arcAlt: 0.18,
         color: "#ffffff",
+        label: "West Asia",
       },
     ],
     []
@@ -449,24 +402,34 @@ export default function HeroPremium() {
 
             {/* Right Side - Globe */}
             <div className="w-full lg:w-[52%] xl:w-[55%] relative">
-              {/* Region Markers */}
-
-
               {/* Globe Container with parallax */}
               <motion.div
                 style={{ x: smoothX, y: smoothY }}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="relative lg:mt-8"
+                className="relative"
               >
+                {/* Graduation Cap - Top Right of Globe */}
+                {/* <motion.div
+                  className="absolute top-12 sm:top-16 md:top-20 right-[15%] sm:right-[18%] md:right-[20%] z-20"
+                  initial={{ opacity: 0, y: -20, rotate: 0 }}
+                  animate={{ opacity: 1, y: 0, rotate: 25 }}
+                  transition={{ duration: 0.6, delay: 0.8 }}
+                >
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-[#cd553b]/20 blur-2xl rounded-full scale-150" />
+                    <GraduationCap
+                      className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 text-[#cd553b] scale-110 drop-shadow-lg relative"
+                      strokeWidth={2}
+                    />
+                  </div>
+                </motion.div> */}
 
                 {/* Glow */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                   <div className="w-[60%] h-[60%] bg-[#92bec0]/8 rounded-full blur-[60px]" />
                 </div>
-
-
 
                 {/* Globe Display - Optimized size for static view */}
                 <div className="h-[350px] sm:h-[420px] md:h-[500px] lg:h-[560px] xl:h-[620px]">
