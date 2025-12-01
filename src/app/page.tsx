@@ -1,5 +1,6 @@
 import About from "./(home5)/about";
 import Hero from "./(home5)/hero";
+import HeroPremium from "./(home5)/hero-premium";
 import CallBack from "./(home5)/callback";
 import CallTo from "./(home5)/callto";
 import Counter from "./(home5)/counter";
@@ -14,13 +15,13 @@ import { Gallery6 } from "@/components/gallery6";
 export default function Home() {
   return (
     <>
-      <Hero />
-      <Counter />
-      <Service />
+      <HeroPremium />
+      {/* <Counter />
+      <Service /> */}
       {/* <About /> */}
-      <OurClients />
+      {/* <OurClients /> */}
       {/* <Gallery6 /> */}
-      <Testimonial />
+      {/* <Testimonial /> */}
 
       {/* <Markets /> */}
       {/* <Skill /> */}
@@ -28,7 +29,7 @@ export default function Home() {
       {/* <CallTo />
       <WorldMap /> */}
       {/* <Pricing /> */}
-      <CTASection />
+      {/* <CTASection /> */}
       {/* <Blog /> */}
     </>
   );
