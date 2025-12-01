@@ -23,72 +23,6 @@ const WorldPremium = dynamic(
   }
 );
 
-// Animated counter with intersection observer - Premium Design
-const AnimatedCounter = ({
-  end,
-  suffix = "",
-  label,
-  icon: Icon,
-  delay = 0,
-}: {
-  end: number;
-  suffix?: string;
-  label: string;
-  icon: LucideIcon;
-  delay?: number;
-}) => {
-  const [count, setCount] = useState(0);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-          let startTime: number;
-          const duration = 2000;
-
-          const animate = (timestamp: number) => {
-            if (!startTime) startTime = timestamp;
-            const progress = Math.min((timestamp - startTime) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setCount(Math.floor(eased * end));
-            if (progress < 1) requestAnimationFrame(animate);
-          };
-
-          requestAnimationFrame(animate);
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [end, hasAnimated]);
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.8 + delay }}
-      className="group relative"
-    >
-      <div className="relative flex flex-col items-center p-4 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] hover:bg-white/[0.06] hover:border-white/10 transition-all duration-500">
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <Icon className="w-5 h-5 text-[#92bec0] mb-2 opacity-70 group-hover:opacity-100 transition-opacity" />
-        <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tabular-nums tracking-tight">
-          {count}
-          <span className="text-[#cd553b]">{suffix}</span>
-        </div>
-        <div className="text-[10px] sm:text-xs text-white/50 mt-1.5 font-medium uppercase tracking-wider">
-          {label}
-        </div>
-      </div>
-    </motion.div>
-  );
-};
 
 
 
@@ -132,7 +66,7 @@ export default function HeroPremium() {
       emissive: "#2a2b76",
       emissiveIntensity: 0.1,
       shininess: 0.9,
-      arcTime: 2000, // Smooth 2 second arc travel
+      arcTime: 500, // Smooth 2 second arc travel
       arcLength: 0.6,
       rings: 1,
       maxRings: 3,
@@ -421,7 +355,7 @@ export default function HeroPremium() {
                 className="relative"
               >
                 {/* Premium Graduation Cap - Clean Modern Design */}
-                <motion.div
+                {/* <motion.div
                   className="absolute top-6 sm:top-10 md:top-14 right-[10%] sm:right-[12%] md:right-[15%] z-20"
                   initial={{ opacity: 0, y: -20, scale: 0.9 }}
                   animate={{
@@ -447,39 +381,32 @@ export default function HeroPremium() {
                       ease: "easeInOut",
                     }}
                   >
-                    {/* Soft glow */}
                     <div className="absolute -inset-4 bg-[#cd553b]/20 blur-3xl rounded-full" />
 
-                    {/* Clean Modern Graduation Cap SVG */}
                     <svg
                       viewBox="0 0 100 100"
                       className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 relative"
                       style={{ filter: 'drop-shadow(0 10px 30px rgba(0, 0, 0, 0.4))' }}
                     >
                       <defs>
-                        {/* Main board gradient - rich dark with subtle depth */}
                         <linearGradient id="boardMain" x1="0%" y1="0%" x2="100%" y2="100%">
                           <stop offset="0%" stopColor="#2a2d3e" />
                           <stop offset="40%" stopColor="#1f2233" />
                           <stop offset="100%" stopColor="#151722" />
                         </linearGradient>
-                        {/* Board top shine */}
                         <linearGradient id="boardShine" x1="0%" y1="0%" x2="0%" y2="100%">
                           <stop offset="0%" stopColor="rgba(255,255,255,0.15)" />
                           <stop offset="100%" stopColor="rgba(255,255,255,0)" />
                         </linearGradient>
-                        {/* Cap base gradient */}
                         <linearGradient id="capBase" x1="0%" y1="0%" x2="0%" y2="100%">
                           <stop offset="0%" stopColor="#252839" />
                           <stop offset="100%" stopColor="#1a1c28" />
                         </linearGradient>
-                        {/* Tassel coral gradient */}
                         <linearGradient id="tasselCoral" x1="0%" y1="0%" x2="0%" y2="100%">
                           <stop offset="0%" stopColor="#e07058" />
                           <stop offset="50%" stopColor="#cd553b" />
                           <stop offset="100%" stopColor="#b54530" />
                         </linearGradient>
-                        {/* Gold button */}
                         <radialGradient id="goldButton" cx="30%" cy="30%" r="70%">
                           <stop offset="0%" stopColor="#ffe066" />
                           <stop offset="50%" stopColor="#ffc733" />
@@ -487,7 +414,6 @@ export default function HeroPremium() {
                         </radialGradient>
                       </defs>
 
-                      {/* Cap base (skull cap) */}
                       <ellipse
                         cx="50" cy="58" rx="22" ry="12"
                         fill="url(#capBase)"
@@ -499,29 +425,24 @@ export default function HeroPremium() {
                         strokeWidth="0.5"
                       />
 
-                      {/* Mortarboard - clean diamond */}
                       <polygon
                         points="50,22 88,44 50,66 12,44"
                         fill="url(#boardMain)"
                       />
-                      {/* Board edge highlight */}
                       <polygon
                         points="50,22 88,44 50,66 12,44"
                         fill="none"
                         stroke="rgba(255,255,255,0.08)"
                         strokeWidth="1"
                       />
-                      {/* Top face shine */}
                       <polygon
                         points="50,22 69,33 50,44 31,33"
                         fill="url(#boardShine)"
                       />
 
-                      {/* Center button */}
                       <circle cx="50" cy="44" r="4" fill="url(#goldButton)" />
                       <circle cx="48" cy="42" r="1.5" fill="rgba(255,255,255,0.5)" />
 
-                      {/* Tassel cord */}
                       <path
                         d="M50,44 Q58,50 62,60 Q65,70 62,78"
                         stroke="url(#tasselCoral)"
@@ -530,10 +451,8 @@ export default function HeroPremium() {
                         strokeLinecap="round"
                       />
 
-                      {/* Tassel knot */}
                       <circle cx="62" cy="78" r="4" fill="url(#tasselCoral)" />
 
-                      {/* Tassel threads */}
                       <g stroke="#cd553b" strokeWidth="2" strokeLinecap="round">
                         <line x1="59" y1="81" x2="57" y2="92" />
                         <line x1="62" y1="82" x2="61" y2="94" />
@@ -541,14 +460,12 @@ export default function HeroPremium() {
                       </g>
                     </svg>
                   </motion.div>
-                </motion.div>
+                </motion.div> */}
 
-                {/* Glow */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                   <div className="w-[60%] h-[60%] bg-[#92bec0]/8 rounded-full blur-[60px]" />
                 </div>
 
-                {/* Globe Display - Optimized size for static view */}
                 <div className="h-[350px] sm:h-[420px] md:h-[500px] lg:h-[560px] xl:h-[620px]">
                   {isMounted && (
                     <WorldPremium
