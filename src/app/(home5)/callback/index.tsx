@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function CTASection() {
   return (
-    <section className="py-32 bg-white">
+    <section className="pt-12 pb-32 bg-white">
       <div className="border-y border-gray-200 bg-gray-50 max-w-full overflow-hidden pt-10 md:pt-16 lg:pt-20">
         <div className="container mx-auto px-6 relative flex flex-col md:flex-row md:gap-12">
           {/* Left Content */}

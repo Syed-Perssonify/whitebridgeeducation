@@ -10,11 +10,12 @@ import Testimonial from "./(home5)/testimonial";
 import TeamMember from "./(home5)/team-member";
 import CTASection from "./(home5)/callback";
 import { Gallery6 } from "@/components/gallery6";
+import HeroPremium1 from "./(home5)/hero";
 
 export default function Home() {
   return (
     <>
-      <Hero />
+      <HeroPremium1 />
       <Counter />
       <Service />
       {/* <About /> */}
