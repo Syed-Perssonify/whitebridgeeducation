@@ -2,16 +2,27 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { FaRocket } from "react-icons/fa";
 
 export default function Header() {
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
   const toggleOffcanvas = () => {
     setIsOffcanvasOpen(!isOffcanvasOpen);
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
@@ -132,170 +143,192 @@ export default function Header() {
 
       {/* Main Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between py-1 lg:py-1.5 lg:grid lg:grid-cols-12 lg:gap-4">
-            {/* Logo */}
-            <div className="lg:col-span-2 flex items-center">
-              <Link href="/" className="block">
-                <Image
-                  src="/logo-2.0.png"
-                  alt="Logo"
-                  width={80}
-                  height={28}
-                  draggable={false}
-                  className="h-auto w-auto"
-                  priority
-                />
-              </Link>
+        <div className="relative">
+          {/* Announcement Banner - Below header, hides on scroll */}
+          {!isScrolled && (
+            <div className="absolute left-0 right-0 top-full z-[60] bg-AccentColor-0">
+              <div className="container mx-auto px-4">
+                <div className="flex items-center justify-center gap-3 py-3">
+                  <FaRocket className="text-yellow-400 text-xl flex-shrink-0" />
+                  <p className="text-white text-sm lg:text-base text-center">
+                    Announcing U.S. News &amp; World Report&apos;s Strategic
+                    Investment in White Bridge Education.{" "}
+                    <Link
+                      href="/announcement"
+                      className="underline font-medium hover:text-yellow-400 transition-colors"
+                    >
+                      Learn More Here!
+                    </Link>
+                  </p>
+                </div>
+              </div>
             </div>
+          )}
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between py-1 lg:py-1.5 lg:grid lg:grid-cols-12 lg:gap-4">
+              {/* Logo */}
+              <div className="lg:col-span-2 flex items-center">
+                <Link href="/" className="block">
+                  <Image
+                    src="/logo-2.0.png"
+                    alt="Logo"
+                    width={80}
+                    height={28}
+                    draggable={false}
+                    className="h-auto w-auto"
+                    priority
+                  />
+                </Link>
+              </div>
 
-            {/* Desktop Menu */}
-            <nav className="lg:col-span-10 hidden lg:flex lg:items-center lg:justify-end">
-              <ul className="flex items-center justify-end gap-4 lg:gap-6">
-                <li className="group">
-                  <Link
-                    href="/about"
-                    className={`relative py-1 inline-block text-xs lg:text-sm transition-colors ${
-                      pathname === "/about"
-                        ? "text-[#2a2b76] font-medium"
-                        : "text-gray-700 hover:text-[#2a2b76]"
-                    }`}
-                  >
-                    Who we are
-                    <span
-                      className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+              {/* Desktop Menu */}
+              <nav className="lg:col-span-10 hidden lg:flex lg:items-center lg:justify-end">
+                <ul className="flex items-center justify-end gap-4 lg:gap-6">
+                  <li className="group">
+                    <Link
+                      href="/about"
+                      className={`relative py-1 inline-block text-sm lg:text-base font-bold transition-colors ${
                         pathname === "/about"
-                          ? "scale-x-100"
-                          : "scale-x-0 group-hover:scale-x-100"
+                          ? "text-[#2a2b76]"
+                          : "text-gray-700 hover:text-[#2a2b76]"
                       }`}
-                    />
-                  </Link>
-                </li>
-                <li className="group">
-                  <Link
-                    href="/service"
-                    className={`relative py-1 inline-block text-xs lg:text-sm transition-colors ${
-                      pathname === "/service"
-                        ? "text-[#2a2b76] font-medium"
-                        : "text-gray-700 hover:text-[#2a2b76]"
-                    }`}
-                  >
-                    What we do
-                    <span
-                      className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+                    >
+                      Who we are
+                      <span
+                        className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+                          pathname === "/about"
+                            ? "scale-x-100"
+                            : "scale-x-0 group-hover:scale-x-100"
+                        }`}
+                      />
+                    </Link>
+                  </li>
+                  <li className="group">
+                    <Link
+                      href="/service"
+                      className={`relative py-1 inline-block text-sm lg:text-base font-bold transition-colors ${
                         pathname === "/service"
-                          ? "scale-x-100"
-                          : "scale-x-0 group-hover:scale-x-100"
+                          ? "text-[#2a2b76]"
+                          : "text-gray-700 hover:text-[#2a2b76]"
                       }`}
-                    />
-                  </Link>
-                </li>
-                <li className="group">
-                  <Link
-                    href="/universities"
-                    className={`relative py-1 inline-block text-xs lg:text-sm transition-colors ${
-                      pathname === "/universities"
-                        ? "text-[#2a2b76] font-medium"
-                        : "text-gray-700 hover:text-[#2a2b76]"
-                    }`}
-                  >
-                    Our Universities
-                    <span
-                      className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+                    >
+                      What we do
+                      <span
+                        className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+                          pathname === "/service"
+                            ? "scale-x-100"
+                            : "scale-x-0 group-hover:scale-x-100"
+                        }`}
+                      />
+                    </Link>
+                  </li>
+                  <li className="group">
+                    <Link
+                      href="/universities"
+                      className={`relative py-1 inline-block text-sm lg:text-base font-bold transition-colors ${
                         pathname === "/universities"
-                          ? "scale-x-100"
-                          : "scale-x-0 group-hover:scale-x-100"
+                          ? "text-[#2a2b76]"
+                          : "text-gray-700 hover:text-[#2a2b76]"
                       }`}
-                    />
-                  </Link>
-                </li>
-                <li className="group">
-                  <Link
-                    href="/events"
-                    className={`relative py-1 inline-block text-xs lg:text-sm transition-colors ${
-                      pathname === "/events"
-                        ? "text-[#2a2b76] font-medium"
-                        : "text-gray-700 hover:text-[#2a2b76]"
-                    }`}
-                  >
-                    Events, Tours & Fairs
-                    <span
-                      className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+                    >
+                      Our Universities
+                      <span
+                        className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+                          pathname === "/universities"
+                            ? "scale-x-100"
+                            : "scale-x-0 group-hover:scale-x-100"
+                        }`}
+                      />
+                    </Link>
+                  </li>
+                  <li className="group">
+                    <Link
+                      href="/events"
+                      className={`relative py-1 inline-block text-sm lg:text-base font-bold transition-colors ${
                         pathname === "/events"
-                          ? "scale-x-100"
-                          : "scale-x-0 group-hover:scale-x-100"
+                          ? "text-[#2a2b76]"
+                          : "text-gray-700 hover:text-[#2a2b76]"
                       }`}
-                    />
-                  </Link>
-                </li>
-                <li className="group">
-                  <Link
-                    href="/careers"
-                    className={`relative py-1 inline-block text-xs lg:text-sm transition-colors ${
-                      pathname === "/careers"
-                        ? "text-[#2a2b76] font-medium"
-                        : "text-gray-700 hover:text-[#2a2b76]"
-                    }`}
-                  >
-                    Careers @ WBE
-                    <span
-                      className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+                    >
+                      Events, Tours & Fairs
+                      <span
+                        className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+                          pathname === "/events"
+                            ? "scale-x-100"
+                            : "scale-x-0 group-hover:scale-x-100"
+                        }`}
+                      />
+                    </Link>
+                  </li>
+                  <li className="group">
+                    <Link
+                      href="/careers"
+                      className={`relative py-1 inline-block text-sm lg:text-base font-bold transition-colors ${
                         pathname === "/careers"
-                          ? "scale-x-100"
-                          : "scale-x-0 group-hover:scale-x-100"
+                          ? "text-[#2a2b76]"
+                          : "text-gray-700 hover:text-[#2a2b76]"
                       }`}
-                    />
-                  </Link>
-                </li>
-                <li className="group">
-                  <Link
-                    href="/contact"
-                    className={`relative py-1 inline-block text-xs lg:text-sm transition-colors ${
-                      pathname === "/contact"
-                        ? "text-[#2a2b76] font-medium"
-                        : "text-gray-700 hover:text-[#2a2b76]"
-                    }`}
-                  >
-                    Contact Us
-                    <span
-                      className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+                    >
+                      Careers @ WBE
+                      <span
+                        className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+                          pathname === "/careers"
+                            ? "scale-x-100"
+                            : "scale-x-0 group-hover:scale-x-100"
+                        }`}
+                      />
+                    </Link>
+                  </li>
+                  <li className="group">
+                    <Link
+                      href="/contact"
+                      className={`relative py-1 inline-block text-sm lg:text-base font-bold transition-colors ${
                         pathname === "/contact"
-                          ? "scale-x-100"
-                          : "scale-x-0 group-hover:scale-x-100"
+                          ? "text-[#2a2b76]"
+                          : "text-gray-700 hover:text-[#2a2b76]"
                       }`}
-                    />
-                  </Link>
-                </li>
-              </ul>
-            </nav>
+                    >
+                      Contact Us
+                      <span
+                        className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+                          pathname === "/contact"
+                            ? "scale-x-100"
+                            : "scale-x-0 group-hover:scale-x-100"
+                        }`}
+                      />
+                    </Link>
+                  </li>
+                </ul>
+              </nav>
 
-            {/* Mobile Hamburger Button */}
-            <div className="lg:hidden flex items-center">
-              <button
-                onClick={toggleOffcanvas}
-                className="w-8 h-8 flex flex-col items-center justify-center gap-1.5 group"
-                aria-label="Toggle menu"
-              >
-                <span
-                  className={`w-5 h-0.5 bg-black transition-all duration-300 ${
-                    isOffcanvasOpen
-                      ? "rotate-45 translate-y-2"
-                      : "rotate-0 translate-y-0"
-                  }`}
-                ></span>
-                <span
-                  className={`w-5 h-0.5 bg-black transition-all duration-300 ${
-                    isOffcanvasOpen ? "opacity-0" : "opacity-100"
-                  }`}
-                ></span>
-                <span
-                  className={`w-5 h-0.5 bg-black transition-all duration-300 ${
-                    isOffcanvasOpen
-                      ? "-rotate-45 -translate-y-2"
-                      : "rotate-0 translate-y-0"
-                  }`}
-                ></span>
-              </button>
+              {/* Mobile Hamburger Button */}
+              <div className="lg:hidden flex items-center">
+                <button
+                  onClick={toggleOffcanvas}
+                  className="w-8 h-8 flex flex-col items-center justify-center gap-1.5 group"
+                  aria-label="Toggle menu"
+                >
+                  <span
+                    className={`w-5 h-0.5 bg-black transition-all duration-300 ${
+                      isOffcanvasOpen
+                        ? "rotate-45 translate-y-2"
+                        : "rotate-0 translate-y-0"
+                    }`}
+                  ></span>
+                  <span
+                    className={`w-5 h-0.5 bg-black transition-all duration-300 ${
+                      isOffcanvasOpen ? "opacity-0" : "opacity-100"
+                    }`}
+                  ></span>
+                  <span
+                    className={`w-5 h-0.5 bg-black transition-all duration-300 ${
+                      isOffcanvasOpen
+                        ? "-rotate-45 -translate-y-2"
+                        : "rotate-0 translate-y-0"
+                    }`}
+                  ></span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

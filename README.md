@@ -75,7 +75,7 @@ npm run start
 nextjs/
 ├── src/
 │   ├── app/
-│   │   ├── (home)/          # Homepage sections
+│   │   ├── (home-2)/        # Homepage sections
 │   │   │   ├── banner/
 │   │   │   ├── brand/
 │   │   │   ├── feature/
@@ -125,7 +125,7 @@ import { Fira_Sans } from "next/font/google";
 ```
 
 ### Content
-Edit content directly in component files under `src/app/(home)/[section]/index.tsx`
+Edit content directly in component files under `src/app/(home-2)/[section]/index.tsx`
 
 ## 📊 Performance Optimizations
 

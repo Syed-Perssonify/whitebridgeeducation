@@ -116,15 +116,15 @@ export default function HeroSection() {
       color: "#ffffff",
     },
     // West Asia
-    {
-      order: 8,
-      startLat: 35.0,
-      startLng: 45.0,
-      endLat: 35.0,
-      endLng: 45.0,
-      arcAlt: 0.1,
-      color: "#ffffff",
-    },
+    // {
+    //   order: 8,
+    //   startLat: 35.0,
+    //   startLng: 45.0,
+    //   endLat: 35.0,
+    //   endLng: 45.0,
+    //   arcAlt: 0.1,
+    //   color: "#ffffff",
+    // },
   ];
 
   return (

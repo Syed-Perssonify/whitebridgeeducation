@@ -2,7 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaPhone } from "react-icons/fa6";
 import { MdLocationPin, MdEmail } from "react-icons/md";
-import { FaYoutube, FaWhatsapp, FaLinkedin } from "react-icons/fa";
+import {
+  FaYoutube,
+  FaWhatsapp,
+  FaLinkedinIn,
+  FaFacebookF,
+  FaTwitter,
+} from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -13,224 +19,175 @@ export default function Footer() {
 
       <div className="relative z-10">
         <div className="container mx-auto px-6 pt-12 pb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
-            {/* Logo & Description Section */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
+            {/* Brand */}
             <div className="lg:col-span-4">
-              <Link href="/" className="inline-block mb-4">
+              <Link href="/" className="inline-block mb-6">
                 <Image
                   src="/logo-vertical.png"
                   alt="White Bridge Education Logo"
-                  width={160}
+                  width={180}
                   height={120}
-                  draggable={false}
-                  className="h-auto w-auto max-w-[140px]"
+                  className="h-auto w-auto max-w-[180px]"
                 />
               </Link>
-              <p className="text-white/70 text-sm leading-relaxed max-w-xs">
-                Connecting global universities with South Asia and the Middle
-                East's brightest minds.
+              <p className="text-white/70 text-base leading-relaxed max-w-sm">
+                Connecting Global Universities to South Asia and the Middle East
+                - the world's fastest growing economies.
               </p>
+              <div className="flex items-center gap-3 mt-6">
+                <Link
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#2a2b76] transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <FaLinkedinIn />
+                </Link>
+                <Link
+                  href="https://youtube.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-red-600 transition-colors"
+                  aria-label="YouTube"
+                >
+                  <FaYoutube />
+                </Link>
+                <Link
+                  href="https://whatsapp.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-green-500 transition-colors"
+                  aria-label="WhatsApp"
+                >
+                  <FaWhatsapp />
+                </Link>
+                <Link
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-blue-600 transition-colors"
+                  aria-label="Facebook"
+                >
+                  <FaFacebookF />
+                </Link>
+                <Link
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-sky-500 transition-colors"
+                  aria-label="Twitter"
+                >
+                  <FaTwitter />
+                </Link>
+              </div>
             </div>
 
             {/* Quick Links */}
-            <div className="lg:col-span-2">
-              <h3 className="text-white font-semibold text-base mb-4">
+            <div className="lg:col-span-3">
+              <h3 className="text-white font-semibold text-lg mb-5">
                 Quick Links
               </h3>
-              <ul className="space-y-2">
+              <ul className="space-y-3 text-sm text-white/70">
+                {[
+                  { label: "Who we are", href: "/about" },
+                  { label: "What we do", href: "/service" },
+                  { label: "Our Universities", href: "/universities" },
+                  { label: "Events, Tours & Fairs", href: "/events" },
+                  { label: "Careers @ WBE", href: "/careers" },
+                  { label: "Contact Us", href: "/contact" },
+                ].map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div className="lg:col-span-3">
+              <h3 className="text-white font-semibold text-lg mb-5">
+                Contact Us
+              </h3>
+              <div className="space-y-4 text-sm text-white/70">
+                <div className="flex items-start gap-3">
+                  <FaPhone className="text-white mt-1" />
+                  <span>+91 9136130742</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MdEmail className="text-white mt-1" />
+                  <Link
+                    href="mailto:info@whitebridgeeducation.com"
+                    className="hover:text-white transition-colors"
+                  >
+                    info@whitebridgeeducation.com
+                  </Link>
+                </div>
+                <Link
+                  href="https://www.google.com/maps/place/Prasad+Chambers,+Tata+Rd+No+2,+Charni+Road+East,+Opera+House,+Girgaon,+Mumbai,+Maharashtra+400004/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3 hover:text-white transition-colors"
+                >
+                  <MdLocationPin className="text-white mt-1" />
+                  <span>
+                    Prasad Chambers #302,
+                    <br />
+                    Opera House, Mumbai - 400004
+                  </span>
+                </Link>
+                <Link
+                  href="https://www.google.com/maps/search/World+Trade+Center+Dubai/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3 hover:text-white transition-colors"
+                >
+                  <MdLocationPin className="text-white mt-1" />
+                  <span>
+                    World Trade Center Dubai,
+                    <br />
+                    Dubai, UAE
+                  </span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Legal */}
+            <div className="lg:col-span-2">
+              <h3 className="text-white font-semibold text-lg mb-5">Legal</h3>
+              <ul className="space-y-3 text-sm text-white/70">
                 <li>
                   <Link
-                    href="/about"
-                    className="text-white/70 text-sm hover:text-white transition-colors duration-300 inline-flex items-center group"
+                    href="/privacy"
+                    className="hover:text-white transition-colors"
                   >
-                    <span className="group-hover:translate-x-1 transition-transform duration-300">
-                      Privacy Policy
-                    </span>
+                    Privacy Policy
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/service"
-                    className="text-white/70 text-sm hover:text-white transition-colors duration-300 inline-flex items-center group"
+                    href="/terms"
+                    className="hover:text-white transition-colors"
                   >
-                    <span className="group-hover:translate-x-1 transition-transform duration-300">
-                      Services
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/#research"
-                    className="text-white/70 text-sm hover:text-white transition-colors duration-300 inline-flex items-center group"
-                  >
-                    <span className="group-hover:translate-x-1 transition-transform duration-300">
-                      Contact us
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/#testimonials"
-                    className="text-white/70 text-sm hover:text-white transition-colors duration-300 inline-flex items-center group"
-                  >
-                    <span className="group-hover:translate-x-1 transition-transform duration-300">
-                      Careers
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/contact"
-                    className="text-white/70 text-sm hover:text-white transition-colors duration-300 inline-flex items-center group"
-                  >
-                    <span className="group-hover:translate-x-1 transition-transform duration-300">
-                      Contact
-                    </span>
+                    Terms of Service
                   </Link>
                 </li>
               </ul>
             </div>
-
-            {/* Locations */}
-            <div className="lg:col-span-3">
-              <h3 className="text-white font-semibold text-base mb-4">
-                Our Offices
-              </h3>
-              <div className="space-y-4">
-                {/* Mumbai Office */}
-                <Link
-                  href="https://www.google.com/maps/place/Prasad+Chambers,+Tata+Rd+No+2,+Charni+Road+East,+Opera+House,+Girgaon,+Mumbai,+Maharashtra+400004/@18.9544015,72.8146768,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7ce103e6ec89d:0xe9100d13231f6ef6!8m2!3d18.9543964!4d72.8172517!16s%2Fg%2F12hnmggmy?entry=ttu&g_ep=EgoyMDI1MDcxNi4wIKXMDSoASAFQAw%3D%3D"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block rounded-xl border border-white/5 bg-white/0 p-3 hover:border-white/20 hover:bg-white/5 transition-colors"
-                >
-                  <div className="flex gap-2.5 items-start">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-[#cd553b] to-[#a03d27] flex items-center justify-center shadow-lg">
-                      <MdLocationPin className="text-white text-base" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-white/90 font-medium text-sm mb-1 group-hover:text-white">
-                        Mumbai, India
-                      </p>
-                      <p className="text-white/60 text-xs leading-relaxed group-hover:text-white/80">
-                        Prasad Chambers #302,
-                        <br />
-                        Opera House, Mumbai - 400004
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-
-                {/* Dubai Office */}
-                <Link
-                  href="https://www.google.com/maps/search/Dubai+World+Trade+Centre,+Sheikh+Zayed+Road,+Dubai,+United+Arab+Emirates"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block rounded-xl border border-white/5 bg-white/0 p-3 hover:border-white/20 hover:bg-white/5 transition-colors"
-                >
-                  <div className="flex gap-2.5 items-start">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-[#cd553b] to-[#a03d27] flex items-center justify-center shadow-lg">
-                      <MdLocationPin className="text-white text-base" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-white/90 font-medium text-sm mb-1 group-hover:text-white">
-                        Dubai, UAE
-                      </p>
-                      <p className="text-white/60 text-xs leading-relaxed group-hover:text-white/80">
-                        World Trade Center Dubai,
-                        <br />
-                        Dubai, UAE
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            </div>
-
-            {/* Contact & Social */}
-            <div className="lg:col-span-3">
-              <h3 className="text-white font-semibold text-base mb-4">
-                Get in Touch
-              </h3>
-              <div className="space-y-3 mb-5">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
-                    <FaPhone className="text-white text-xs" />
-                  </div>
-                  <p className="text-white/70 text-sm">+91 9136130742</p>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
-                    <MdEmail className="text-white text-sm" />
-                  </div>
-                  <Link href="mailto:info@whitebridgeeducation.com">
-                    <p className="text-white/70 text-sm hover:text-white transition-colors">
-                      info@whitebridgeeducation.com
-                    </p>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Social Media */}
-              <div>
-                <p className="text-white/90 font-medium text-sm mb-3">
-                  Follow Us
-                </p>
-                <div className="flex items-center gap-2.5">
-                  <Link
-                    href="https://youtube.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="YouTube"
-                    className="w-8 h-8 rounded-lg bg-white/10 hover:bg-red-600 flex items-center justify-center transition-all duration-300 hover:scale-110"
-                  >
-                    <FaYoutube className="text-white text-base" />
-                  </Link>
-                  <Link
-                    href="https://whatsapp.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="WhatsApp"
-                    className="w-8 h-8 rounded-lg bg-white/10 hover:bg-green-500 flex items-center justify-center transition-all duration-300 hover:scale-110"
-                  >
-                    <FaWhatsapp className="text-white text-base" />
-                  </Link>
-                  <Link
-                    href="https://linkedin.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn"
-                    className="w-8 h-8 rounded-lg bg-white/10 hover:bg-blue-600 flex items-center justify-center transition-all duration-300 hover:scale-110"
-                  >
-                    <FaLinkedin className="text-white text-base" />
-                  </Link>
-                </div>
-              </div>
-            </div>
           </div>
 
-          {/* Copyright Bar */}
-          <div className="mt-10 pt-6 border-t border-white/10">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-3">
-              <p className="text-white/50 text-xs">
-                © {new Date().getFullYear()} White Bridge Education. All rights
-                reserved.
-              </p>
-              <div className="flex items-center gap-4">
-                <Link
-                  href="/privacy"
-                  className="text-white/50 text-xs hover:text-white transition-colors"
-                >
-                  Privacy Policy
-                </Link>
-                <Link
-                  href="/terms"
-                  className="text-white/50 text-xs hover:text-white transition-colors"
-                >
-                  Terms of Service
-                </Link>
-              </div>
-            </div>
+          {/* Bottom Bar */}
+          <div className="mt-10 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/70">
+            <p>Copyright © 2025 White Bridge Education. All rights reserved.</p>
+            <p className="text-white font-medium">
+              Built on Ethics. Powered by Data. Committed to ROI.
+            </p>
           </div>
         </div>
       </div>
