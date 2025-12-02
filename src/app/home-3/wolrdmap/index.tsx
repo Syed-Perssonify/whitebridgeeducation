@@ -2,7 +2,7 @@
 
 import { WorldMap } from "@/components/map";
 
-export default function WorldMapPage3() {
+export default function WorldMapMain() {
   return (
     <div className="py-4 md:py-6 bg-white w-full">
       <div className="container mx-auto px-6">
@@ -14,76 +14,69 @@ export default function WorldMapPage3() {
         <div className="w-full">
           <WorldMap
             dots={[
+              // 1. India to Middle East
               {
                 start: {
-                  lat: 64.2008,
-                  lng: -149.4937,
-                  label: "Fairbanks",
+                  lat: 8.0,
+                  lng: 80.0,
+                  label: "India",
                 },
                 end: {
-                  lat: 34.0522,
-                  lng: -118.2437,
-                  label: "Los Angeles",
+                  lat: 6.0,
+                  lng: 47.0,
+                  label: "Middle East",
                 },
               },
+              // 2. Middle East to Africa
               {
                 start: {
-                  lat: 64.2008,
-                  lng: -149.4937,
-                  label: "Fairbanks",
+                  lat: 6.0,
+                  lng: 47.0,
+                  label: "",
                 },
                 end: {
-                  lat: -15.7975,
-                  lng: -47.8919,
-                  label: "Brasília",
+                  lat: -11.0,
+                  lng: 18.2812,
+                  label: "Africa",
                 },
               },
+              // 3. India to Bangladesh
               {
                 start: {
-                  lat: -15.7975,
-                  lng: -47.8919,
-                  label: "Brasília",
+                  lat: 8.0,
+                  lng: 80.0,
+                  label: "",
                 },
                 end: {
-                  lat: 38.7223,
-                  lng: -9.1393,
-                  label: "Lisbon",
+                  lat: 18.0,
+                  lng: 95.0,
+                  label: "Bangladesh",
                 },
               },
+              // 4. India to Sri Lanka
               {
                 start: {
-                  lat: 51.5074,
-                  lng: -0.1278,
-                  label: "London",
+                  lat: 8.0,
+                  lng: 80.0,
+                  label: "",
                 },
                 end: {
-                  lat: 28.6139,
-                  lng: 77.209,
-                  label: "New Delhi",
+                  lat: -7.0,
+                  lng: 85.0,
+                  label: "Sri Lanka",
                 },
               },
+              // 5. Middle East to Central Asia
               {
                 start: {
-                  lat: 28.6139,
-                  lng: 77.209,
-                  label: "New Delhi",
+                  lat: 6.0,
+                  lng: 47.0,
+                  label: "",
                 },
                 end: {
-                  lat: 43.1332,
-                  lng: 131.9113,
-                  label: "Vladivostok",
-                },
-              },
-              {
-                start: {
-                  lat: 28.6139,
-                  lng: 77.209,
-                  label: "New Delhi",
-                },
-                end: {
-                  lat: -1.2921,
-                  lng: 36.8219,
-                  label: "Nairobi",
+                  lat: 35.0,
+                  lng: 20.0,
+                  label: "Central Asia",
                 },
               },
             ]}
