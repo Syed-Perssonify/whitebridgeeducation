@@ -11,6 +11,7 @@ import TeamMember from "./(home5)/team-member";
 import CTASection from "./(home5)/callback";
 import { Gallery6 } from "@/components/gallery6";
 import HeroPremium1 from "./(home5)/hero";
+import WorldMapMain from "./(home5)/wolrdmap";
 
 export default function Home() {
   return (
@@ -29,6 +30,7 @@ export default function Home() {
       {/* <CallTo />
       <WorldMap /> */}
       {/* <Pricing /> */}
+      <WorldMapMain />
       <CTASection />
       {/* <Blog /> */}
     </>
