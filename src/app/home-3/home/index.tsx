@@ -162,18 +162,45 @@ export default function HeroPremium() {
     >
       {/* Premium Background System */}
       <div className="absolute inset-0">
-        {/* Base gradient - deep sophisticated navy */}
-        <div className="absolute inset-0 bg-[#0a0c1a]" />
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ zIndex: 0 }}
+        >
+          <source src="/video/edu-video.mp4" type="video/mp4" />
+        </video>
 
-        {/* Layered gradients for depth */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0f1228] via-[#151a3d] to-[#0d1025]" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-[#cd553b]/5 via-transparent to-[#92bec0]/8" />
+        {/* Base gradient overlay - semi-transparent to let video show through */}
+        <div
+          className="absolute inset-0 bg-[#0a0c1a]/70"
+          style={{ zIndex: 1 }}
+        />
+
+        {/* Layered gradients for depth - more transparent */}
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-[#0f1228]/60 via-[#151a3d]/50 to-[#0d1025]/60"
+          style={{ zIndex: 2 }}
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-tr from-[#cd553b]/5 via-transparent to-[#92bec0]/8"
+          style={{ zIndex: 3 }}
+        />
 
         {/* Radial accent from center-right for globe glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_50%,rgba(146,190,192,0.08)_0%,transparent_50%)]" />
+        <div
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_50%,rgba(146,190,192,0.08)_0%,transparent_50%)]"
+          style={{ zIndex: 4 }}
+        />
 
-        {/* Subtle vignette */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,12,26,0.4)_100%)]" />
+        {/* Subtle vignette - more transparent */}
+        <div
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,12,26,0.3)_100%)]"
+          style={{ zIndex: 5 }}
+        />
 
         {/* Animated ambient glow - coral accent */}
         <motion.div

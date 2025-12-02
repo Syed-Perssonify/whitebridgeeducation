@@ -2,7 +2,13 @@
 
 import { useRef, useEffect, useState, useCallback, useMemo } from "react";
 import dynamic from "next/dynamic";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { FaArrowRight, FaChevronRight } from "react-icons/fa";
 import { TrendingUp, Users, Globe2, type LucideIcon } from "lucide-react";
 
@@ -21,11 +27,21 @@ const WorldPremium = dynamic(
 
 export default function HeroPremium1() {
   const [isMounted, setIsMounted] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   // Hydration safe
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  // Scroll-based parallax effects
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0]);
 
   // Smooth mouse tracking for parallax
   const mouseX = useMotionValue(0);
@@ -157,11 +173,12 @@ export default function HeroPremium1() {
 
   return (
     <section
+      ref={sectionRef}
       onMouseMove={handleMouseMove}
       className="relative min-h-screen flex items-center overflow-x-hidden"
     >
       {/* Premium Background System */}
-      <div className="absolute inset-0">
+      <motion.div style={{ y }} className="absolute inset-0 z-0">
         {/* Base gradient - deep sophisticated navy */}
         <div className="absolute inset-0 bg-[#0a0c1a]" />
 
@@ -240,10 +257,10 @@ export default function HeroPremium1() {
         {/* Diagonal accent line */}
         <div className="absolute top-0 left-[30%] w-px h-full bg-gradient-to-b from-transparent via-white/[0.03] to-transparent transform -skew-x-12" />
         <div className="absolute top-0 left-[35%] w-px h-full bg-gradient-to-b from-transparent via-[#cd553b]/[0.05] to-transparent transform -skew-x-12" />
-      </div>
+      </motion.div>
 
       {/* Main Content */}
-      <div className="relative z-10 w-full">
+      <motion.div style={{ opacity }} className="relative z-10 w-full">
         <div className="max-w-[1500px] mx-auto px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12">
           <div className="flex flex-col lg:flex-row items-center justify-center min-h-screen pt-24 pb-16 lg:pt-28 lg:pb-20 gap-8 lg:gap-6">
             {/* Left Content - Premium Design */}
@@ -466,7 +483,7 @@ export default function HeroPremium1() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

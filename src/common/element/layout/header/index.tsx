@@ -142,7 +142,7 @@ export default function Header() {
       )}
 
       {/* Main Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#1a1b3d] shadow-md">
         <div className="relative">
           {/* Announcement Banner - Below header, hides on scroll */}
           {!isScrolled && (
@@ -170,12 +170,12 @@ export default function Header() {
               <div className="lg:col-span-2 flex items-center">
                 <Link href="/" className="block">
                   <Image
-                    src="/logo-2.0.png"
-                    alt="Logo"
-                    width={80}
-                    height={28}
+                    src="/logo-vertical.png"
+                    alt="White Bridge Education Logo"
+                    width={180}
+                    height={120}
                     draggable={false}
-                    className="h-auto w-auto"
+                    className="h-auto w-auto max-w-[180px]"
                     priority
                   />
                 </Link>
@@ -189,16 +189,16 @@ export default function Header() {
                       href="/about"
                       className={`relative py-1 inline-block text-sm lg:text-base font-bold transition-colors ${
                         pathname === "/about"
-                          ? "text-[#2a2b76]"
-                          : "text-gray-700 hover:text-[#2a2b76]"
+                          ? "text-white"
+                          : "text-white hover:text-[#cd553b]"
                       }`}
                     >
                       Who we are
                       <span
-                        className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+                        className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ${
                           pathname === "/about"
-                            ? "scale-x-100"
-                            : "scale-x-0 group-hover:scale-x-100"
+                            ? "bg-white scale-x-100"
+                            : "bg-[#cd553b] scale-x-0 group-hover:scale-x-100"
                         }`}
                       />
                     </Link>
@@ -208,16 +208,16 @@ export default function Header() {
                       href="/service"
                       className={`relative py-1 inline-block text-sm lg:text-base font-bold transition-colors ${
                         pathname === "/service"
-                          ? "text-[#2a2b76]"
-                          : "text-gray-700 hover:text-[#2a2b76]"
+                          ? "text-white"
+                          : "text-white hover:text-[#cd553b]"
                       }`}
                     >
                       What we do
                       <span
-                        className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+                        className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ${
                           pathname === "/service"
-                            ? "scale-x-100"
-                            : "scale-x-0 group-hover:scale-x-100"
+                            ? "bg-white scale-x-100"
+                            : "bg-[#cd553b] scale-x-0 group-hover:scale-x-100"
                         }`}
                       />
                     </Link>
@@ -227,16 +227,16 @@ export default function Header() {
                       href="/universities"
                       className={`relative py-1 inline-block text-sm lg:text-base font-bold transition-colors ${
                         pathname === "/universities"
-                          ? "text-[#2a2b76]"
-                          : "text-gray-700 hover:text-[#2a2b76]"
+                          ? "text-white"
+                          : "text-white hover:text-[#cd553b]"
                       }`}
                     >
                       Our Universities
                       <span
-                        className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+                        className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ${
                           pathname === "/universities"
-                            ? "scale-x-100"
-                            : "scale-x-0 group-hover:scale-x-100"
+                            ? "bg-white scale-x-100"
+                            : "bg-[#cd553b] scale-x-0 group-hover:scale-x-100"
                         }`}
                       />
                     </Link>
@@ -246,16 +246,16 @@ export default function Header() {
                       href="/events"
                       className={`relative py-1 inline-block text-sm lg:text-base font-bold transition-colors ${
                         pathname === "/events"
-                          ? "text-[#2a2b76]"
-                          : "text-gray-700 hover:text-[#2a2b76]"
+                          ? "text-white"
+                          : "text-white hover:text-[#cd553b]"
                       }`}
                     >
                       Events, Tours & Fairs
                       <span
-                        className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+                        className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ${
                           pathname === "/events"
-                            ? "scale-x-100"
-                            : "scale-x-0 group-hover:scale-x-100"
+                            ? "bg-white scale-x-100"
+                            : "bg-[#cd553b] scale-x-0 group-hover:scale-x-100"
                         }`}
                       />
                     </Link>
@@ -265,16 +265,16 @@ export default function Header() {
                       href="/careers"
                       className={`relative py-1 inline-block text-sm lg:text-base font-bold transition-colors ${
                         pathname === "/careers"
-                          ? "text-[#2a2b76]"
-                          : "text-gray-700 hover:text-[#2a2b76]"
+                          ? "text-white"
+                          : "text-white hover:text-[#cd553b]"
                       }`}
                     >
                       Careers @ WBE
                       <span
-                        className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+                        className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ${
                           pathname === "/careers"
-                            ? "scale-x-100"
-                            : "scale-x-0 group-hover:scale-x-100"
+                            ? "bg-white scale-x-100"
+                            : "bg-[#cd553b] scale-x-0 group-hover:scale-x-100"
                         }`}
                       />
                     </Link>
@@ -284,16 +284,16 @@ export default function Header() {
                       href="/contact"
                       className={`relative py-1 inline-block text-sm lg:text-base font-bold transition-colors ${
                         pathname === "/contact"
-                          ? "text-[#2a2b76]"
-                          : "text-gray-700 hover:text-[#2a2b76]"
+                          ? "text-white"
+                          : "text-white hover:text-[#cd553b]"
                       }`}
                     >
                       Contact Us
                       <span
-                        className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2a2b76] transition-all duration-300 ${
+                        className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ${
                           pathname === "/contact"
-                            ? "scale-x-100"
-                            : "scale-x-0 group-hover:scale-x-100"
+                            ? "bg-white scale-x-100"
+                            : "bg-[#cd553b] scale-x-0 group-hover:scale-x-100"
                         }`}
                       />
                     </Link>
@@ -309,19 +309,19 @@ export default function Header() {
                   aria-label="Toggle menu"
                 >
                   <span
-                    className={`w-5 h-0.5 bg-black transition-all duration-300 ${
+                    className={`w-5 h-0.5 bg-white transition-all duration-300 ${
                       isOffcanvasOpen
                         ? "rotate-45 translate-y-2"
                         : "rotate-0 translate-y-0"
                     }`}
                   ></span>
                   <span
-                    className={`w-5 h-0.5 bg-black transition-all duration-300 ${
+                    className={`w-5 h-0.5 bg-white transition-all duration-300 ${
                       isOffcanvasOpen ? "opacity-0" : "opacity-100"
                     }`}
                   ></span>
                   <span
-                    className={`w-5 h-0.5 bg-black transition-all duration-300 ${
+                    className={`w-5 h-0.5 bg-white transition-all duration-300 ${
                       isOffcanvasOpen
                         ? "-rotate-45 -translate-y-2"
                         : "rotate-0 translate-y-0"
