@@ -9,7 +9,7 @@ export default function CTASection() {
       <div className="border-y border-gray-200 bg-gray-50 max-w-full overflow-hidden pt-10 md:pt-16 lg:pt-20">
         <div className="container mx-auto px-6 relative flex flex-col md:flex-row md:gap-12">
           {/* Left Content */}
-          <div className="mb-72 md:mb-28 md:w-2/3 lg:shrink-0 xl:mb-20 xl:w-1/2">
+          <div className="mb-72 md:mb-28 md:w-1/2 lg:shrink-0 xl:mb-20">
             <h3 className="text-[#2a2b76] font-bold text-4xl md:text-5xl mb-4 md:mb-6">
               Work with Us
             </h3>
@@ -27,8 +27,8 @@ export default function CTASection() {
           </div>
 
           {/* Right - Stacked Cards with Images */}
-          <div className="absolute bottom-0 right-1/2 h-min w-[110%] max-w-md translate-x-1/2 md:right-0 md:w-3/4 md:max-w-xl md:translate-x-0 lg:mt-auto xl:relative xl:right-0 xl:bottom-0 xl:h-full xl:w-full xl:max-w-full">
-            <div className="aspect-[8/5] relative h-full min-h-64 w-full translate-y-8 md:translate-y-12 lg:translate-y-16">
+          <div className="absolute bottom-0 right-1/2 h-min w-[110%] max-w-md translate-x-1/2 md:relative md:right-auto md:w-1/2 md:max-w-xl md:translate-x-0 md:mt-20 lg:mt-auto xl:h-full xl:w-full xl:max-w-full">
+            <div className="aspect-[8/5] relative h-full min-h-64 w-full -translate-y-8 md:-translate-y-4 lg:translate-y-0">
               {/* Card 1 - Left Back */}
               <div className="aspect-[3/5] bg-white shadow-xl absolute left-0 top-0 z-30 flex w-[45%] translate-x-[10%] translate-y-[12%] -rotate-[20deg] justify-center overflow-hidden rounded-3xl">
                 <div className="relative w-full h-full">
@@ -55,7 +55,7 @@ export default function CTASection() {
               </div>
 
               {/* Card 3 - Right Back */}
-              <div className="aspect-[3/5] bg-white shadow-xl absolute right-0 top-0 z-30 flex w-[45%] -translate-x-[10%] translate-y-[4%] rotate-[20deg] justify-center overflow-hidden rounded-3xl">
+              <div className="aspect-[3/5] bg-white shadow-xl absolute right-0 top-0 z-30 flex w-[45%] -translate-x-[10%] translate-y-[12%] rotate-[20deg] justify-center overflow-hidden rounded-3xl">
                 <div className="relative w-full h-full">
                   <Image
                     src="/Careers/medium-shot-people-with-laptop.jpg"

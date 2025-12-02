@@ -103,13 +103,8 @@ export function WorldMap({
         </defs>
 
         {dots.map((dot, i) => {
-          // Only render path if both start and end have labels
-          if (
-            !dot.start.label ||
-            !dot.end.label ||
-            dot.start.label.trim() === "" ||
-            dot.end.label.trim() === ""
-          ) {
+          // Only render path if end has a label (start label is optional for chained connections)
+          if (!dot.end.label || dot.end.label.trim() === "") {
             return null;
           }
 
@@ -160,13 +155,8 @@ export function WorldMap({
         })}
 
         {dots.map((dot, i) => {
-          // Only render points if both start and end have labels
-          if (
-            !dot.start.label ||
-            !dot.end.label ||
-            dot.start.label.trim() === "" ||
-            dot.end.label.trim() === ""
-          ) {
+          // Only render points if end has a label
+          if (!dot.end.label || dot.end.label.trim() === "") {
             return null;
           }
 
@@ -228,17 +218,17 @@ export function WorldMap({
                         initial={{ opacity: 0, y: 5 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5 * i + 0.3, duration: 0.5 }}
-                        className="pointer-events-none scale-150"
+                        className="pointer-events-none scale-125"
                       >
                         <foreignObject
-                          x={startPoint.x - 50}
-                          y={startPoint.y - 35}
-                          width="100"
-                          height="30"
+                          x={startPoint.x - 45}
+                          y={startPoint.y - 30}
+                          width="90"
+                          height="25"
                           className="block"
                         >
                           <div className="flex items-center justify-center h-full">
-                            <span className="text-sm font-medium px-2 py-0.5 rounded-md bg-white/95 dark:bg-black/95 text-black dark:text-white border border-gray-200 dark:border-gray-700 shadow-sm">
+                            <span className="text-xs font-medium px-1.5 py-0.5 text-black dark:text-white">
                               {dot.start.label}
                             </span>
                           </div>
@@ -301,17 +291,17 @@ export function WorldMap({
                         initial={{ opacity: 0, y: 5 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5 * i + 0.5, duration: 0.5 }}
-                        className="pointer-events-none scale-150"
+                        className="pointer-events-none scale-125"
                       >
                         <foreignObject
-                          x={endPoint.x - 50}
-                          y={endPoint.y - 35}
-                          width="100"
-                          height="30"
+                          x={endPoint.x - 45}
+                          y={endPoint.y - 30}
+                          width="90"
+                          height="25"
                           className="block"
                         >
                           <div className="flex items-center justify-center h-full">
-                            <span className="text-sm font-medium px-2 py-0.5 rounded-md bg-white/95 dark:bg-black/95 text-black dark:text-white border border-gray-200 dark:border-gray-700 shadow-sm">
+                            <span className="text-xs font-medium px-1.5 py-0.5 text-black dark:text-white">
                               {dot.end.label}
                             </span>
                           </div>
