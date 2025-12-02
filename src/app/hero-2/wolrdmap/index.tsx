@@ -2,16 +2,13 @@
 
 import { WorldMap } from "@/components/map";
 
-export default function WorldMapPage4() {
+export default function WorldMapPage3() {
   return (
     <div className="py-4 md:py-6 bg-white w-full">
       <div className="container mx-auto px-6">
-        <div className="mb-4 text-left">
-          <h4 className="text-PrimaryColor-0 font-bold text-xl md:text-2xl lg:text-3xl">
-            Regions We Serve:{" "}
-            <span className="text-gray-600">
-              Expanding Global Education Reach Across
-            </span>
+        <div className="mb-4 text-center">
+          <h4 className="text-gray-900 font-bold text-xl md:text-2xl lg:text-3xl">
+            Markets/Regions we serve
           </h4>
         </div>
         <div className="w-full">
@@ -19,74 +16,26 @@ export default function WorldMapPage4() {
             dots={[
               {
                 start: {
-                  lat: 64.2008,
-                  lng: -149.4937,
-                  label: "Fairbanks",
+                  lat: -11.0,
+                  lng: 18.2812,
+                  label: "Africa",
                 },
                 end: {
-                  lat: 34.0522,
-                  lng: -118.2437,
-                  label: "Los Angeles",
+                  lat: 6.0,
+                  lng: 47.0,
+                  label: "Middle East",
                 },
               },
               {
                 start: {
-                  lat: 64.2008,
-                  lng: -149.4937,
-                  label: "Fairbanks",
-                },
-                end: {
-                  lat: -15.7975,
-                  lng: -47.8919,
-                  label: "Brasília",
-                },
-              },
-              {
-                start: {
-                  lat: -15.7975,
-                  lng: -47.8919,
-                  label: "Brasília",
-                },
-                end: {
-                  lat: 38.7223,
-                  lng: -9.1393,
-                  label: "Lisbon",
-                },
-              },
-              {
-                start: {
-                  lat: 51.5074,
-                  lng: -0.1278,
-                  label: "London",
-                },
-                end: {
-                  lat: 28.6139,
-                  lng: 77.209,
-                  label: "New Delhi",
-                },
-              },
-              {
-                start: {
-                  lat: 28.6139,
-                  lng: 77.209,
+                  lat: 10.0,
+                  lng: 79.0,
                   label: "New Delhi",
                 },
                 end: {
-                  lat: 43.1332,
-                  lng: 131.9113,
-                  label: "Vladivostok",
-                },
-              },
-              {
-                start: {
-                  lat: 28.6139,
-                  lng: 77.209,
-                  label: "New Delhi",
-                },
-                end: {
-                  lat: -1.2921,
-                  lng: 36.8219,
-                  label: "Nairobi",
+                  lat: 35.0,
+                  lng: 20.0,
+                  label: "Central Asia",
                 },
               },
             ]}
